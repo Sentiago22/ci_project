@@ -12,6 +12,9 @@ jobs:
   test:
     runs-on: ubuntu-latest  # Chạy workflow trên môi trường Ubuntu
 
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]  # Thử nghiệm trên 3 phiên bản Python
     steps:
       - name: Checkout code
         uses: actions/checkout@v2  # Lấy mã nguồn từ repository
@@ -19,7 +22,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Cài đặt Python 3.8
+          python-version: ${{ matrix.python-version }}  # Cài đặt Python 3.8
 
       - name: Install dependencies
         run: |
