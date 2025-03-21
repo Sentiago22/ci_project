@@ -36,7 +36,7 @@ jobs:
 
       - name: Send Telegram Notification on Failure
         if: failure()  # Chỉ gửi thông báo nếu kiểm thử thất bại
-        uses: appleboy/telegram-action@v0.0.8
+        uses: appleboy/telegram-action@v0.0.10
         with:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
