@@ -4,7 +4,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.7.9', '3.8', '3.9']  # Sử dụng phiên bản cụ thể như '3.7.9'
+        python-version: ['3.8', '3.9']
 
     steps:
       - name: Checkout code
