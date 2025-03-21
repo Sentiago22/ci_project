@@ -34,3 +34,10 @@ jobs:
         run: |
           pytest  # Chạy pytest để kiểm tra mã nguồn
 
+      - name: Send Telegram Notification on Failure
+        if: failure()  # Chỉ gửi thông báo nếu kiểm thử thất bại
+        uses: appleboy/telegram-action@v0.0.8
+        with:
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+          message: 'Tests failed in GitHub Actions for your project!'
