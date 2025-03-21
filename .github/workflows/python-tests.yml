@@ -1,45 +1,35 @@
-name: Python Tests
-
-on:
-  push:
-    branches:
-      - main  # Workflow sẽ chạy khi có thay đổi trên nhánh main
-  pull_request:
-    branches:
-      - main  # Workflow sẽ chạy khi có pull request vào nhánh main
-
 jobs:
   test:
-    runs-on: ubuntu-latest  # Chạy workflow trên môi trường Ubuntu
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        python-version: ['3.7.9', '3.8.x', '3.9']  # Thử nghiệm trên 3 phiên bản Python
+        python-version: ['3.7.9', '3.8', '3.9']  # Sử dụng phiên bản cụ thể như '3.7.9'
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Lấy mã nguồn từ repository
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}  # Cài đặt Python 3.8
+          python-version: ${{ matrix.python-version }}  # Cập nhật với phiên bản cụ thể
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Cài đặt các phụ thuộc từ tệp requirements.txt
+          pip install -r requirements.txt
 
       - name: Run flake8
         run: |
-          flake8 .  # Kiểm tra mã nguồn với flake8
+          flake8 .
 
       - name: Run tests
         run: |
-          pytest  # Chạy pytest để kiểm tra mã nguồn
+          pytest
 
       - name: Send Telegram Notification on Failure
-        if: failure()  # Chỉ gửi thông báo nếu kiểm thử thất bại
+        if: failure()
         uses: appleboy/telegram-action@v0.0.8
         with:
           token: ${{ secrets.TELEGRAM_TOKEN }}
