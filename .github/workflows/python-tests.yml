@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ['3.7.x', '3.8.x', '3.9.x']  # Thử nghiệm trên 3 phiên bản Python
+        python-version: ['3.7.9', '3.8.x', '3.9']  # Thử nghiệm trên 3 phiên bản Python
 
     steps:
       - name: Checkout code
